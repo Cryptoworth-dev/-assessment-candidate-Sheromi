@@ -1,0 +1,50 @@
+<!-- Expense List -->
+<div class="expense-container">
+
+  <!-- Page heading -->
+  <h2>Expenses</h2>
+
+  <!-- Expense table -->
+  <table>
+
+    <!-- Table header -->
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Amount</th>
+        <th>Category</th>
+        <th>Description</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+
+    <!-- Table body -->
+    <tbody>
+
+      <!--
+        Loop through the expenses array.
+        Angular creates one table row for each expense.
+      -->
+      <tr *ngFor="let expense of expenses">
+
+        <!-- Expense ID -->
+        <td>{{ expense.id }}</td>
+
+        <!-- Expense amount -->
+        <td>{{ expense.amount }}</td>
+
+        <!-- Expense category -->
+        <td>{{ expense.category }}</td>
+
+        <!-- Expense description -->
+        <td>{{ expense.description }}</td>
+
+        <!-- Expense date -->
+        <td>{{ expense.expense_date }}</td>
+
+      </tr>
+
+    </tbody>
+  </table>
+
+</div>
