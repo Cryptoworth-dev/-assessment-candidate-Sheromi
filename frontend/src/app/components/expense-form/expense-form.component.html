@@ -1,0 +1,101 @@
+<!-- Expense Form -->
+<div class="expense-form-container">
+
+  <!-- Form heading -->
+  <h2>Add Expense</h2>
+
+  <!--
+    Connect the HTML form to our Reactive Form.
+    When submitted, Angular calls the onSubmit() method.
+  -->
+  <form [formGroup]="expenseForm" (ngSubmit)="onSubmit()">
+
+    <!-- Description -->
+    <div class="form-group">
+      <label for="description">Description</label>
+
+      <input
+        id="description"
+        type="text"
+        formControlName="description"
+        placeholder="Enter expense description"
+      />
+
+      <!-- Description validation message -->
+      @if (
+        expenseForm.controls.description.touched &&
+        expenseForm.controls.description.invalid
+      ) {
+        <small>Description is required.</small>
+      }
+    </div>
+
+    <!-- Amount -->
+    <div class="form-group">
+      <label for="amount">Amount</label>
+
+      <input
+        id="amount"
+        type="number"
+        step="0.01"
+        min="0"
+        formControlName="amount"
+        placeholder="Enter amount"
+      />
+
+      <!-- Amount validation message -->
+      @if (
+        expenseForm.controls.amount.touched &&
+        expenseForm.controls.amount.invalid
+      ) {
+        <small>Please enter a valid amount.</small>
+      }
+    </div>
+
+    <!-- Category -->
+    <div class="form-group">
+      <label for="category">Category</label>
+
+      <input
+        id="category"
+        type="text"
+        formControlName="category"
+        placeholder="Enter expense category"
+      />
+
+      <!-- Category validation message -->
+      @if (
+        expenseForm.controls.category.touched &&
+        expenseForm.controls.category.invalid
+      ) {
+        <small>Category is required.</small>
+      }
+    </div>
+
+    <!-- Expense date -->
+    <div class="form-group">
+      <label for="expense_date">Expense Date</label>
+
+      <input
+        id="expense_date"
+        type="date"
+        formControlName="expense_date"
+      />
+
+      <!-- Date validation message -->
+      @if (
+        expenseForm.controls.expense_date.touched &&
+        expenseForm.controls.expense_date.invalid
+      ) {
+        <small>Expense date is required.</small>
+      }
+    </div>
+
+    <!-- Submit button -->
+    <button type="submit">
+      Add Expense
+    </button>
+
+  </form>
+
+</div>

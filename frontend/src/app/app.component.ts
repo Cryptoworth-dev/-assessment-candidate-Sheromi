@@ -1,18 +1,21 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
-// Import the ExpenseListComponent
-// This component handles fetching and displaying expenses
+// Component responsible for creating expenses
+import { ExpenseFormComponent } from './components/expense-form/expense-form.component';
+
+// Component responsible for fetching and displaying expenses
 import { ExpenseListComponent } from './components/expense-list/expense-list.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
 
-  // Make the router outlet and expense list component
+  // Make the router outlet, expense form, and expense list
   // available in the AppComponent template
   imports: [
     RouterOutlet,
+    ExpenseFormComponent,
     ExpenseListComponent
   ],
 
@@ -23,11 +26,16 @@ import { ExpenseListComponent } from './components/expense-list/expense-list.com
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-
-  // AppComponent is the root application component.
+  // AppComponent acts as the root application component.
+  //
+  // ExpenseFormComponent is responsible for:
+  // - Collecting expense information
+  // - Validating the form
+  // - Sending new expenses to the Laravel API
   //
   // ExpenseListComponent is responsible for:
   // - Fetching expenses from the Laravel API
   // - Storing the expenses
   // - Displaying the expenses
 }
+
