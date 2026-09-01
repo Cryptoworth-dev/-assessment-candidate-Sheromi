@@ -49,6 +49,12 @@
           <td>
             <button
               type="button"
+              (click)="editExpense(expense)">
+              Edit
+            </button>
+            
+            <button
+              type="button"
               (click)="deleteExpense(expense.id)">
               Delete
             </button>

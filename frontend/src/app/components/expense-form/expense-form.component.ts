@@ -1,9 +1,20 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges
+} from '@angular/core';
+
 import {
   FormBuilder,
   ReactiveFormsModule,
   Validators
 } from '@angular/forms';
+
+// Import the Expense model
+import { Expense } from '../../models/expense';
 
 // Service used to communicate with the Laravel API
 import { ExpenseService } from '../../services/expense.service';
@@ -18,10 +29,22 @@ import { ExpenseService } from '../../services/expense.service';
   templateUrl: './expense-form.component.html',
   styleUrl: './expense-form.component.css'
 })
-export class ExpenseFormComponent {
+export class ExpenseFormComponent implements OnChanges {
+
+  // Expense selected for editing
+  @Input() expenseToEdit: Expense | null = null;
 
   // Notify the parent component when a new expense is created
   @Output() expenseCreated = new EventEmitter<void>();
+
+  // Notify the parent component when an expense is updated
+  @Output() expenseUpdated = new EventEmitter<void>();
+
+  // Notify the parent component when editing is cancelled
+  @Output() editCancelled = new EventEmitter<void>();
+
+  // Store the ID of the expense currently being edited
+  editingExpenseId: number | null = null;
 
   // Create the expense form with validation rules
   expenseForm = this.formBuilder.group({
@@ -36,6 +59,35 @@ export class ExpenseFormComponent {
     private formBuilder: FormBuilder,
     private expenseService: ExpenseService
   ) {}
+
+  // Detect when the parent sends an expense to edit
+  ngOnChanges(changes: SimpleChanges): void {
+
+    if (changes['expenseToEdit']) {
+
+      if (this.expenseToEdit) {
+
+        // Store the ID of the expense being edited
+        this.editingExpenseId = this.expenseToEdit.id;
+
+        // Populate the form with the existing expense data
+        this.expenseForm.patchValue({
+          description: this.expenseToEdit.description,
+          amount: this.expenseToEdit.amount,
+          category: this.expenseToEdit.category,
+          expense_date: this.expenseToEdit.expense_date.substring(0, 10)
+        });
+
+      } else {
+
+        // Exit edit mode
+        this.editingExpenseId = null;
+
+        // Clear the form
+        this.expenseForm.reset();
+      }
+    }
+  }
 
   // Handle form submission
   onSubmit(): void {
@@ -54,12 +106,53 @@ export class ExpenseFormComponent {
       expense_date: this.expenseForm.value.expense_date ?? ''
     };
 
-    // Send the expense data to Laravel
+    // If an expense ID exists, update the existing expense
+    if (this.editingExpenseId !== null) {
+
+      this.expenseService
+        .updateExpense(this.editingExpenseId, expenseData)
+        .subscribe({
+
+          // Runs when the expense is successfully updated
+          next: (response) => {
+
+            console.log(
+              'Expense updated successfully:',
+              response
+            );
+
+            // Exit edit mode
+            this.editingExpenseId = null;
+
+            // Reset the form
+            this.expenseForm.reset();
+
+            // Notify the parent component
+            this.expenseUpdated.emit();
+          },
+
+          // Runs if the API request fails
+          error: (error) => {
+            console.error(
+              'Failed to update expense:',
+              error
+            );
+          }
+        });
+
+      return;
+    }
+
+    // Create a new expense
     this.expenseService.createExpense(expenseData).subscribe({
 
       // Runs when the expense is successfully created
       next: (response) => {
-        console.log('Expense created successfully:', response);
+
+        console.log(
+          'Expense created successfully:',
+          response
+        );
 
         // Reset the form after successful submission
         this.expenseForm.reset();
@@ -70,8 +163,24 @@ export class ExpenseFormComponent {
 
       // Runs if the API request fails
       error: (error) => {
-        console.error('Failed to create expense:', error);
+        console.error(
+          'Failed to create expense:',
+          error
+        );
       }
     });
+  }
+
+  // Cancel the current edit
+  cancelEdit(): void {
+
+    // Exit edit mode
+    this.editingExpenseId = null;
+
+    // Clear the form
+    this.expenseForm.reset();
+
+    // Notify the parent component
+    this.editCancelled.emit();
   }
 }

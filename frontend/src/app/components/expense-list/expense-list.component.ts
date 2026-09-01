@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  Output
+} from '@angular/core';
 
 // Import the Expense model
 import { Expense } from '../../models/expense';
@@ -17,6 +22,9 @@ export class ExpenseListComponent implements OnInit {
 
   // Store the expenses received from the Laravel API
   expenses: Expense[] = [];
+
+  // Notify the parent component when an expense is selected for editing
+  @Output() expenseEdit = new EventEmitter<Expense>();
 
   // Inject the ExpenseService
   constructor(private expenseService: ExpenseService) {}
@@ -46,6 +54,11 @@ export class ExpenseListComponent implements OnInit {
         console.error('Failed to fetch expenses:', error);
       }
     });
+  }
+
+  // Notify the parent component that an expense should be edited
+  editExpense(expense: Expense): void {
+    this.expenseEdit.emit(expense);
   }
 
   // Delete an expense by ID
@@ -81,3 +94,4 @@ export class ExpenseListComponent implements OnInit {
     });
   }
 }
+

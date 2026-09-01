@@ -1,6 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
+// Import the Expense model 
+import { Expense } from './models/expense';
+
 // Component responsible for creating expenses
 import { ExpenseFormComponent } from './components/expense-form/expense-form.component';
 
@@ -27,14 +30,28 @@ import { ExpenseListComponent } from './components/expense-list/expense-list.com
 })
 export class AppComponent {
 
-  // Get access to the ExpenseListComponent instance
-  @ViewChild(ExpenseListComponent)
+  // Reference to the expense list component 
+  @ViewChild(ExpenseListComponent) 
   expenseListComponent!: ExpenseListComponent;
 
-  // Called when the ExpenseFormComponent successfully creates an expense
-  onExpenseCreated(): void {
+  // Store the expense currently selected for editing 
+  selectedExpense: Expense | null = null; 
 
-    // Refresh the expense list so the new expense appears immediately
+  // Called when the user clicks the Edit button 
+  onExpenseEdit(expense: Expense): void { 
+    this.selectedExpense = expense; 
+  } 
+
+  // Called after an expense is created or updated 
+  onExpenseChanged(): void { 
+    this.selectedExpense = null; 
+
+    // Refresh the expense list to show the latest data
     this.expenseListComponent.loadExpenses();
+  } 
+
+  // Called when the user cancels editing 
+  onEditCancelled(): void { 
+    this.selectedExpense = null; 
   }
 }

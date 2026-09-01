@@ -96,6 +96,14 @@
       Add Expense
     </button>
 
+    <!-- Cancel edit button --> 
+    @if (editingExpenseId) { 
+        <button 
+        type="button" 
+        (click)="cancelEdit()"> 
+        Cancel
+    </button> }
+
   </form>
 
 </div>
