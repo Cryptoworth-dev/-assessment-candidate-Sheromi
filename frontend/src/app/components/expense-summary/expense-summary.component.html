@@ -9,3 +9,17 @@
   </div>
 
 </div>
+
+<!-- Expense Summary by Category -->
+<div class="summary-categories">
+
+  <h3>By Category</h3>
+
+  @for (category of byCategory | keyvalue; track category.key) {
+    <div class="category-row">
+      <span>{{ category.key }}</span>
+      <span>{{ category.value }}</span>
+    </div>
+  }
+
+</div>

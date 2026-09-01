@@ -13,6 +13,7 @@ import { ExpenseListComponent } from './components/expense-list/expense-list.com
 // Component responsible for displaying expense summary
 import { ExpenseSummaryComponent } from './components/expense-summary/expense-summary.component';
 
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -38,6 +39,10 @@ export class AppComponent {
   @ViewChild(ExpenseListComponent) 
   expenseListComponent!: ExpenseListComponent;
 
+  // Reference to the expense summary component
+  @ViewChild(ExpenseSummaryComponent)
+  expenseSummaryComponent!: ExpenseSummaryComponent;
+
   // Store the expense currently selected for editing 
   selectedExpense: Expense | null = null; 
 
@@ -52,6 +57,9 @@ export class AppComponent {
 
     // Refresh the expense list to show the latest data
     this.expenseListComponent.loadExpenses();
+
+    // Refresh the expense summary
+    this.expenseSummaryComponent.loadSummary();
   } 
 
   // Called when the user cancels editing 

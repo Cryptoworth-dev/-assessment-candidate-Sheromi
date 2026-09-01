@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 
+// Import the KeyValuePipe to use it in the template
+import { KeyValuePipe } from '@angular/common';
+
 // Import the ExpenseService to use it in this component
 import { ExpenseService } from '../../services/expense.service';
 
 @Component({
   selector: 'app-expense-summary',
   standalone: true,
-  imports: [],
+  imports: [KeyValuePipe],
   templateUrl: './expense-summary.component.html',
   styleUrl: './expense-summary.component.css'
 })
@@ -22,7 +25,11 @@ export class ExpenseSummaryComponent implements OnInit {
 
   // Runs when the component is initialized
   ngOnInit(): void {
+    this.loadSummary();
+  }
 
+  // Method to load the summary data
+  loadSummary(): void {
     this.expenseService.getSummary().subscribe({
       next: (response) => {
         this.total = response.data.total;
@@ -32,7 +39,6 @@ export class ExpenseSummaryComponent implements OnInit {
         console.error('Failed to fetch expense summary:', error);
       }
     });
-    
   }
 
 }
