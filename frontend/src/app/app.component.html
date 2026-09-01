@@ -1,31 +1,32 @@
-<!--
-  AppComponent is the main application shell.
+<div class="app-container">
 
-  ExpenseFormComponent is responsible for:
-  - Collecting expense information
-  - Validating the form
-  - Creating new expenses
+  <!-- Page header -->
+  <header class="page-header">
+    <h1>Expense Tracker</h1>
+    <p>Manage and track your expenses easily.</p>
+  </header>
 
-  ExpenseListComponent is responsible for:
-  - Fetching expenses
-  - Storing expenses
-  - Displaying the expense table
--->
+  <!-- Expense form -->
+  <section class="card">
+    <app-expense-form
+      [expenseToEdit]="selectedExpense"
+      (expenseCreated)="onExpenseChanged()"
+      (expenseUpdated)="onExpenseChanged()"
+      (editCancelled)="onEditCancelled()">
+    </app-expense-form>
+  </section>
 
-<!-- Expense creation/editing form --> 
-<app-expense-form 
-    [expenseToEdit]="selectedExpense" 
-    (expenseCreated)="onExpenseChanged()" 
-    (expenseUpdated)="onExpenseChanged()" 
-    (editCancelled)="onEditCancelled()"> 
-</app-expense-form> 
+  <!-- Expense summary -->
+  <section class="card">
+    <app-expense-summary>
+    </app-expense-summary>
+  </section>
 
-<!-- Expense list --> 
-<app-expense-list 
-    (expenseEdit)="onExpenseEdit($event)"> 
-</app-expense-list>
+  <!-- Expense list -->
+  <section class="card">
+    <app-expense-list
+      (expenseEdit)="onExpenseEdit($event)">
+    </app-expense-list>
+  </section>
 
-<!-- Expense summary -->
-<app-expense-summary>
-    
-</app-expense-summary>
+</div>

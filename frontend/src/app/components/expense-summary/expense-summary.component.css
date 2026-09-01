@@ -1,0 +1,48 @@
+/* Main summary sections */
+.expense-summary,
+.summary-categories {
+  margin-top: 20px;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+/* Section headings */
+.expense-summary h2,
+.summary-categories h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+/* Total expenses */
+.summary-total {
+  padding: 15px;
+  background: #f5f5f5;
+  border-radius: 6px;
+}
+
+.summary-total h3,
+.summary-total p {
+  margin: 0;
+}
+
+/* Total amount */
+.summary-total p {
+  margin-top: 8px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Category breakdown */
+.category-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+/* Remove border from the last category */
+.category-row:last-child {
+  border-bottom: none;
+}

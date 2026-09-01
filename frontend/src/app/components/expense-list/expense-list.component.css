@@ -1,44 +1,45 @@
 /* Main expense list container */
 .expense-container {
-  max-width: 1100px;
-  margin: 40px auto;
-  padding: 20px;
+  margin-top: 30px;
 }
 
-/* Page heading */
+/* Expense list heading */
 .expense-container h2 {
-  margin-bottom: 20px;
-  font-size: 28px;
+  margin-bottom: 15px;
 }
 
 /* Expense table */
-.expense-container table {
+table {
   width: 100%;
   border-collapse: collapse;
   background: #ffffff;
 }
 
-/* Table header and cells */
-.expense-container th,
-.expense-container td {
-  padding: 12px 16px;
+/* Table cells */
+th,
+td {
+  padding: 12px;
+  border: 1px solid #ddd;
   text-align: left;
-  border-bottom: 1px solid #ddd;
 }
 
 /* Table header */
-.expense-container th {
-  font-weight: 600;
+th {
   background: #f5f5f5;
+  font-weight: 600;
 }
 
-/* Highlight a row when the mouse is over it */
-.expense-container tbody tr:hover {
-  background: #f9f9f9;
+/* Action buttons */
+button {
+  margin-right: 6px;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #ffffff;
+  cursor: pointer;
 }
 
-/* Empty-state message */
-.expense-container td[colspan="5"] {
-  text-align: center;
-  padding: 30px;
+/* Button hover effect */
+button:hover {
+  background: #f5f5f5;
 }
