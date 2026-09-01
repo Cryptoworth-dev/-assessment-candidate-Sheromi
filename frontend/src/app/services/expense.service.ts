@@ -16,8 +16,8 @@ export class ExpenseService {
   constructor(private http: HttpClient) {}
 
   // Method to get all expenses
-  getExpenses(): Observable<Expense[]> {
-    return this.http.get<Expense[]>(this.apiUrl);
+  getExpenses(): Observable<{ data: Expense[] }> {
+    return this.http.get<{ data: Expense[] }>(this.apiUrl);
   }
 
   // Method to create a new expense

@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
-// Import the ExpenseService to be used in the component
+// Import the ExpenseService to communicate with the Laravel API
 import { ExpenseService } from './services/expense.service';
+
+// Import the Expense model to define the type of our expenses
+import { Expense } from './models/expense';
 
 @Component({
   selector: 'app-root',
@@ -13,23 +16,34 @@ import { ExpenseService } from './services/expense.service';
 })
 export class AppComponent implements OnInit {
 
-  // Define a title property for the component
+  // Store the expenses received from the Laravel API
+  expenses: Expense[] = [];
+
+  // Inject the ExpenseService into the component
   constructor(private expenseService: ExpenseService) {
     console.log('AppComponent constructor is running');
   }
 
-  // Implement the ngOnInit lifecycle hook to fetch expenses when the component initializes
+  // This method runs when the component is initialized
   ngOnInit(): void {
     console.log('AppComponent started');
 
+    // Call the getExpenses() method from ExpenseService
+    // to fetch expenses from the Laravel API
     this.expenseService.getExpenses().subscribe({
 
-      // Handle the response from the getExpenses method
+      // This runs when the API request is successful
       next: (response) => {
-        console.log('Expenses from Laravel:', response);
+
+        // Store the expenses returned by Laravel
+        // in the expenses property
+        this.expenses = response.data;
+
+        // Display the expenses in the browser console
+        console.log('Expenses from Laravel:', this.expenses);
       },
 
-      // Handle any errors that occur during the HTTP request
+      // This runs if the API request fails
       error: (error) => {
         console.error('Failed to fetch expenses:', error);
       }
