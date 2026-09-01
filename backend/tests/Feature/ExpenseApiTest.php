@@ -96,3 +96,29 @@ test('it can delete an expense', function () {
         'id' => $expense->id,
     ]);
 });
+
+// Test to ensure that the Expense API can return a summary of expenses, including total amount and breakdown by category.
+test('it can return expense summary', function () {
+    Expense::factory()->create([
+        'amount' => 1000.00,
+        'category' => 'Food',
+    ]);
+
+    Expense::factory()->create([
+        'amount' => 2000.00,
+        'category' => 'Food',
+    ]);
+
+    Expense::factory()->create([
+        'amount' => 1500.00,
+        'category' => 'Transport',
+    ]);
+
+    $response = $this->getJson('/api/expenses/summary');
+
+    $response
+        ->assertStatus(200)
+        ->assertJsonPath('data.total', 4500)
+        ->assertJsonPath('data.by_category.Food', 3000)
+        ->assertJsonPath('data.by_category.Transport', 1500);
+});
