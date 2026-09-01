@@ -26,6 +26,26 @@ class ExpenseController extends Controller
     }
 
     /**
+     * Display spending summary.
+     */
+    public function summary(): JsonResponse
+    {
+        $total = Expense::sum('amount');
+
+        $byCategory = Expense::query()
+            ->selectRaw('category, SUM(amount) as total')
+            ->groupBy('category')
+            ->pluck('total', 'category');
+
+        return response()->json([
+            'data' => [
+                'total' => $total,
+                'by_category' => $byCategory,
+            ],
+        ]);
+    }
+
+    /**
      * Store a newly created expense.
      */
     public function store(StoreExpenseRequest $request): JsonResponse
