@@ -10,6 +10,9 @@ import { ExpenseFormComponent } from './components/expense-form/expense-form.com
 // Component responsible for displaying expenses
 import { ExpenseListComponent } from './components/expense-list/expense-list.component';
 
+// Component responsible for displaying expense summary
+import { ExpenseSummaryComponent } from './components/expense-summary/expense-summary.component';
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -19,7 +22,8 @@ import { ExpenseListComponent } from './components/expense-list/expense-list.com
   imports: [
     RouterOutlet,
     ExpenseFormComponent,
-    ExpenseListComponent
+    ExpenseListComponent,
+    ExpenseSummaryComponent
   ],
 
   // Main application HTML template
