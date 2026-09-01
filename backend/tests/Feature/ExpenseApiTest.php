@@ -122,3 +122,57 @@ test('it can return expense summary', function () {
         ->assertJsonPath('data.by_category.Food', 3000)
         ->assertJsonPath('data.by_category.Transport', 1500);
 });
+
+// Test to ensure that the Expense API validates required fields when creating a new expense record.
+test('it validates required fields when creating an expense', function () {
+    $response = $this->postJson('/api/expenses', []);
+
+    $response
+        ->assertStatus(422)
+        ->assertJsonValidationErrors([
+            'description',
+            'amount',
+            'category',
+            'expense_date',
+        ]);
+});
+
+// Test to ensure that the Expense API validates invalid expense values when creating a new expense record.
+test('it validates invalid expense values', function () {
+    $response = $this->postJson('/api/expenses', [
+        'description' => '',
+        'amount' => -100,
+        'category' => '',
+        'expense_date' => 'not-a-date',
+    ]);
+
+    $response
+        ->assertStatus(422)
+        ->assertJsonValidationErrors([
+            'description',
+            'amount',
+            'category',
+            'expense_date',
+        ]);
+});
+
+// Test to ensure that the Expense API validates required fields when updating an existing expense record.
+test('it validates invalid expense values when updating', function () {
+    $expense = Expense::factory()->create();
+
+    $response = $this->putJson("/api/expenses/{$expense->id}", [
+        'description' => '',
+        'amount' => -100,
+        'category' => '',
+        'expense_date' => 'not-a-date',
+    ]);
+
+    $response
+        ->assertStatus(422)
+        ->assertJsonValidationErrors([
+            'description',
+            'amount',
+            'category',
+            'expense_date',
+        ]);
+});
