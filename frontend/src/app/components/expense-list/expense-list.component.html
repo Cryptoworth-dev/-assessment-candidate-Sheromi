@@ -22,29 +22,41 @@
     <tbody>
 
       <!--
-        Loop through the expenses array.
-        Angular creates one table row for each expense.
+        Loop through every expense.
+        track expense.id helps Angular efficiently update the list.
       -->
-      <tr *ngFor="let expense of expenses">
+      @for (expense of expenses; track expense.id) {
 
-        <!-- Expense ID -->
-        <td>{{ expense.id }}</td>
+        <tr>
 
-        <!-- Expense amount -->
-        <td>{{ expense.amount }}</td>
+          <!-- Expense ID -->
+          <td>{{ expense.id }}</td>
 
-        <!-- Expense category -->
-        <td>{{ expense.category }}</td>
+          <!-- Expense amount -->
+          <td>{{ expense.amount }}</td>
 
-        <!-- Expense description -->
-        <td>{{ expense.description }}</td>
+          <!-- Expense category -->
+          <td>{{ expense.category }}</td>
 
-        <!-- Expense date -->
-        <td>{{ expense.expense_date }}</td>
+          <!-- Expense description -->
+          <td>{{ expense.description }}</td>
 
-      </tr>
+          <!-- Expense date -->
+          <td>{{ expense.expense_date }}</td>
+
+        </tr>
+
+      } @empty {
+
+        <!-- Displayed when there are no expenses -->
+        <tr>
+          <td colspan="5">No expenses found.</td>
+        </tr>
+
+      }
 
     </tbody>
   </table>
 
 </div>
+
