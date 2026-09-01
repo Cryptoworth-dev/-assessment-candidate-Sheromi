@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
-// Import the ExpenseService to communicate with the Laravel API
+// Service used to communicate with the Laravel API
 import { ExpenseService } from './services/expense.service';
 
-// Import the Expense model to define the type of our expenses
+// Model used to define the structure of an expense
 import { Expense } from './models/expense';
 
 @Component({
@@ -16,34 +16,29 @@ import { Expense } from './models/expense';
 })
 export class AppComponent implements OnInit {
 
-  // Store the expenses received from the Laravel API
+  // Store the expenses returned from the Laravel API
   expenses: Expense[] = [];
 
-  // Inject the ExpenseService into the component
-  constructor(private expenseService: ExpenseService) {
-    console.log('AppComponent constructor is running');
-  }
+  // Inject ExpenseService so we can call the API
+  constructor(private expenseService: ExpenseService) {}
 
-  // This method runs when the component is initialized
+  // Runs automatically when the component is initialized
   ngOnInit(): void {
-    console.log('AppComponent started');
 
-    // Call the getExpenses() method from ExpenseService
-    // to fetch expenses from the Laravel API
+    // Request all expenses from the Laravel API
     this.expenseService.getExpenses().subscribe({
 
-      // This runs when the API request is successful
+      // Runs when the API request is successful
       next: (response) => {
 
-        // Store the expenses returned by Laravel
-        // in the expenses property
+        // Store the API data in the expenses array
         this.expenses = response.data;
 
-        // Display the expenses in the browser console
+        // Check the fetched expenses in the browser console
         console.log('Expenses from Laravel:', this.expenses);
       },
 
-      // This runs if the API request fails
+      // Runs when the API request fails
       error: (error) => {
         console.error('Failed to fetch expenses:', error);
       }

@@ -1,3 +1,38 @@
-<h1>Expense Tracker</h1>
+<div class="container">
+  <h1>Expense Tracker</h1>
 
-<p>Angular AppComponent is working.</p>
+  <!-- Display expenses when the array contains data -->
+  @if (expenses.length > 0) {
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Amount</th>
+          <th>Category</th>
+          <th>Description</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <!-- Loop through each expense -->
+        @for (expense of expenses; track expense.id) {
+          <tr>
+            <td>{{ expense.id }}</td>
+            <td>{{ expense.amount }}</td>
+            <td>{{ expense.category }}</td>
+            <td>{{ expense.description }}</td>
+            <td>{{ expense.expense_date }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+
+  } @else {
+
+    <!-- Show this when there are no expenses -->
+    <p>No expenses found.</p>
+
+  }
+</div>
