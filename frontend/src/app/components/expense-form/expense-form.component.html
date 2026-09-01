@@ -2,7 +2,7 @@
 <div class="expense-form-container">
 
   <!-- Form heading -->
-  <h2>Add Expense</h2>
+  <h2>{{ editingExpenseId !== null ? 'Edit Expense' : 'Add Expense' }}</h2>
 
   <!--
     Connect the HTML form to our Reactive Form.
@@ -93,11 +93,11 @@
 
     <!-- Submit button -->
     <button type="submit">
-      Add Expense
+      {{ editingExpenseId !== null ? 'Update Expense' : 'Add Expense' }}
     </button>
 
     <!-- Cancel edit button --> 
-    @if (editingExpenseId) { 
+    @if (editingExpenseId !== null) {
         <button 
         type="button" 
         (click)="cancelEdit()"> 
