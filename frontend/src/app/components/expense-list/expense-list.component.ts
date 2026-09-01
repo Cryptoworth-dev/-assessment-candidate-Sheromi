@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NgFor } from '@angular/common';
 
 // Import the Expense model
 import { Expense } from '../../models/expense';
@@ -10,7 +9,7 @@ import { ExpenseService } from '../../services/expense.service';
 @Component({
   selector: 'app-expense-list',
   standalone: true,
-  imports: [NgFor],
+  imports: [],
   templateUrl: './expense-list.component.html',
   styleUrl: './expense-list.component.css'
 })
@@ -24,8 +23,12 @@ export class ExpenseListComponent implements OnInit {
 
   // This method runs when the component is initialized
   ngOnInit(): void {
+    this.loadExpenses();
+  }
 
-    // Fetch expenses from the Laravel API
+  // Fetch expenses from the Laravel API
+  loadExpenses(): void {
+
     this.expenseService.getExpenses().subscribe({
 
       // Handle a successful API response

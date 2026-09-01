@@ -12,8 +12,14 @@
   - Displaying the expense table
 -->
 
-<!-- Expense creation form -->
-<app-expense-form></app-expense-form>
+<!--
+  Listen for the expenseCreated event from the form.
+  When an expense is successfully created,
+  call onExpenseCreated() in AppComponent.
+-->
+<app-expense-form
+  (expenseCreated)="onExpenseCreated()">
+</app-expense-form>
 
 <!-- Expense list -->
 <app-expense-list></app-expense-list>

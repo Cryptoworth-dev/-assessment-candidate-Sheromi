@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, EventEmitter, Output } from '@angular/core';
+import {
+  FormBuilder,
+  ReactiveFormsModule,
+  Validators
+} from '@angular/forms';
 
 // Service used to communicate with the Laravel API
 import { ExpenseService } from '../../services/expense.service';
@@ -15,6 +19,9 @@ import { ExpenseService } from '../../services/expense.service';
   styleUrl: './expense-form.component.css'
 })
 export class ExpenseFormComponent {
+
+  // Notify the parent component when a new expense is created
+  @Output() expenseCreated = new EventEmitter<void>();
 
   // Create the expense form with validation rules
   expenseForm = this.formBuilder.group({
@@ -56,6 +63,9 @@ export class ExpenseFormComponent {
 
         // Reset the form after successful submission
         this.expenseForm.reset();
+
+        // Tell the parent component that a new expense was created
+        this.expenseCreated.emit();
       },
 
       // Runs if the API request fails
@@ -64,6 +74,4 @@ export class ExpenseFormComponent {
       }
     });
   }
-
 }
-

@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 // Component responsible for creating expenses
 import { ExpenseFormComponent } from './components/expense-form/expense-form.component';
 
-// Component responsible for fetching and displaying expenses
+// Component responsible for displaying expenses
 import { ExpenseListComponent } from './components/expense-list/expense-list.component';
 
 @Component({
@@ -26,16 +26,15 @@ import { ExpenseListComponent } from './components/expense-list/expense-list.com
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  // AppComponent acts as the root application component.
-  //
-  // ExpenseFormComponent is responsible for:
-  // - Collecting expense information
-  // - Validating the form
-  // - Sending new expenses to the Laravel API
-  //
-  // ExpenseListComponent is responsible for:
-  // - Fetching expenses from the Laravel API
-  // - Storing the expenses
-  // - Displaying the expenses
-}
 
+  // Get access to the ExpenseListComponent instance
+  @ViewChild(ExpenseListComponent)
+  expenseListComponent!: ExpenseListComponent;
+
+  // Called when the ExpenseFormComponent successfully creates an expense
+  onExpenseCreated(): void {
+
+    // Refresh the expense list so the new expense appears immediately
+    this.expenseListComponent.loadExpenses();
+  }
+}
