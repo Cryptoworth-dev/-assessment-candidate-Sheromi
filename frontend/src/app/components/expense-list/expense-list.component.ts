@@ -47,5 +47,37 @@ export class ExpenseListComponent implements OnInit {
       }
     });
   }
-}
 
+  // Delete an expense by ID
+  deleteExpense(id: number): void {
+
+    // Ask the user to confirm before deleting
+    const confirmed = confirm(
+      'Are you sure you want to delete this expense?'
+    );
+
+    // Stop if the user cancels
+    if (!confirmed) {
+      return;
+    }
+
+    // Send the delete request to Laravel
+    this.expenseService.deleteExpense(id).subscribe({
+
+      // Runs when the expense is successfully deleted
+      next: () => {
+
+        // Log the deleted expense ID
+        console.log('Expense deleted successfully:', id);
+
+        // Refresh the expense list after deletion
+        this.loadExpenses();
+      },
+
+      // Handle API errors
+      error: (error) => {
+        console.error('Failed to delete expense:', error);
+      }
+    });
+  }
+}
