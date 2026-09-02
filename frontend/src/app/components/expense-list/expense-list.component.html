@@ -43,7 +43,7 @@
           <td>{{ expense.description }}</td>
 
           <!-- Expense date -->
-          <td>{{ expense.expense_date }}</td>
+          <td>{{ expense.expense_date | date:'MMM dd, yyyy' }}</td>
 
           <!-- Expense actions -->
           <td>

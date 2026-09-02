@@ -11,10 +11,13 @@ import { Expense } from '../../models/expense';
 // Import the ExpenseService to communicate with the Laravel API
 import { ExpenseService } from '../../services/expense.service';
 
+// Import the DatePipe to format dates in the template
+import { DatePipe } from '@angular/common';
+
 @Component({
   selector: 'app-expense-list',
   standalone: true,
-  imports: [],
+  imports: [DatePipe],
   templateUrl: './expense-list.component.html',
   styleUrl: './expense-list.component.css'
 })
