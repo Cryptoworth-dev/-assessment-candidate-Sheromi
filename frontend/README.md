@@ -4,7 +4,6 @@ Angular frontend for the Cryptoworth Expense Tracker Take-Home Technical Assessm
 
 This frontend is a single-page expense tracker built with Angular. It allows users to create, edit, view, delete, and summarize expenses through a Laravel API.
 
-
 ## Tech stack
 
 Angular 18.2
@@ -12,7 +11,6 @@ TypeScript 5.4
 RxJS 7.8
 Angular Reactive Forms and HttpClient
 Jasmine and Karma
-
 
 ## Features
 
@@ -23,7 +21,6 @@ Jasmine and Karma
 - Delete expenses after browser confirmation.
 - Display the total expense amount and totals by category.
 - Render spending bars for each category.
-
 
 ## API integration
 
@@ -40,13 +37,11 @@ The frontend uses `http://localhost:8000/api/expenses` as its API base URL throu
 
 The list expects the collection response in a `data` property. The summary reads `data.total` and `data.by_category`.
 
-
 ## Installation
 
 From this directory, install the Node.js dependencies:
 
 npm install
-
 
 ## Running the application
 
@@ -55,7 +50,6 @@ Start the Angular development server:
 npm start
 
 Open `http://localhost:4200/`. The API is expected to be available at `http://localhost:8000`.
-
 
 ## Running tests
 
@@ -70,7 +64,6 @@ AppComponent
 ExpenseFormComponent
 ExpenseListComponent
 ExpenseSummaryComponent
-
 
 ## Notes / assumptions
 
