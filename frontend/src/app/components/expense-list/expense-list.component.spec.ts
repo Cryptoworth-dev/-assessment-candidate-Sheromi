@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 import { ExpenseListComponent } from './expense-list.component';
 
@@ -11,7 +12,8 @@ describe('ExpenseListComponent', () => {
     await TestBed.configureTestingModule({
       imports: [ExpenseListComponent],
       providers: [
-        provideHttpClient()
+        provideHttpClient(),
+        provideHttpClientTesting()
       ]
     }).compileComponents();
 
@@ -20,6 +22,7 @@ describe('ExpenseListComponent', () => {
     fixture.detectChanges();
   });
 
+  // Verify that the expense list component can be created
   it('should create', () => {
     expect(component).toBeTruthy();
   });

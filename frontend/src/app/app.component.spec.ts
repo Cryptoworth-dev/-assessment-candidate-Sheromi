@@ -13,6 +13,7 @@ describe('AppComponent', () => {
     }).compileComponents();
   });
 
+  // // Verify that the application component can be created
   it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;

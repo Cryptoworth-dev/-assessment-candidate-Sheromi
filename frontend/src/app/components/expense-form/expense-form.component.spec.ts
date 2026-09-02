@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 import { ExpenseFormComponent } from './expense-form.component';
 
@@ -11,7 +12,8 @@ describe('ExpenseFormComponent', () => {
     await TestBed.configureTestingModule({
       imports: [ExpenseFormComponent],
       providers: [
-        provideHttpClient()
+        provideHttpClient(),
+        provideHttpClientTesting()
       ]
     }).compileComponents();
 
@@ -20,6 +22,7 @@ describe('ExpenseFormComponent', () => {
     fixture.detectChanges();
   });
 
+  //Verify that the expense form component can be created
   it('should create', () => {
     expect(component).toBeTruthy();
   });
