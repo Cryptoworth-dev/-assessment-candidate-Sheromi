@@ -5,13 +5,10 @@ import {
   Output
 } from '@angular/core';
 
-// Import the Expense model
 import { Expense } from '../../models/expense';
 
-// Import the ExpenseService to communicate with the Laravel API
 import { ExpenseService } from '../../services/expense.service';
 
-// Import the DatePipe to format dates in the template
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -35,7 +32,7 @@ export class ExpenseListComponent implements OnInit {
   // Inject the ExpenseService
   constructor(private expenseService: ExpenseService) {}
 
-  // This method runs when the component is initialized
+  // Load expenses when the component is initialized
   ngOnInit(): void {
     this.loadExpenses();
   }

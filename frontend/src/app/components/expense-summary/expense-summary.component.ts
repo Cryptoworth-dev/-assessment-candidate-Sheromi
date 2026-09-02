@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-// Import the KeyValuePipe to use it in the template
 import { KeyValuePipe } from '@angular/common';
-
-// Import the ExpenseService to use it in this component
 import { ExpenseService } from '../../services/expense.service';
 
 @Component({
@@ -28,7 +25,7 @@ export class ExpenseSummaryComponent implements OnInit {
     this.loadSummary();
   }
 
-  // Method to load the summary data
+  // Load the summary data from the API
   loadSummary(): void {
     this.expenseService.getSummary().subscribe({
       next: (response) => {

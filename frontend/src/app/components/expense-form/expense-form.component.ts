@@ -13,7 +13,6 @@ import {
   Validators
 } from '@angular/forms';
 
-// Import the Expense model
 import { Expense } from '../../models/expense';
 
 // Service used to communicate with the Laravel API
