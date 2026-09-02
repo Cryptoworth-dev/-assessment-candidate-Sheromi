@@ -25,7 +25,7 @@ class UpdateExpenseRequest extends FormRequest
         return [
             'description' => ['required', 'string', 'max:255'],
             'amount' => ['required', 'numeric', 'min:0.01'],
-            'category' => ['required', 'string', 'max:100'],
+            'category' => ['required', 'string', 'max:100', 'regex:/[a-zA-Z]/'],
             'expense_date' => ['required', 'date'],
         ];
     }
