@@ -41,4 +41,21 @@ export class ExpenseSummaryComponent implements OnInit {
     });
   }
 
+  // Calculate the width of each chart bar relative to the highest category
+  getBarWidth(amount: number): number {
+    const values = Object.values(this.byCategory);
+
+    if (values.length === 0) {
+      return 0;
+    }
+
+    const maxAmount = Math.max(...values);
+
+    if (maxAmount === 0) {
+      return 0;
+    }
+
+    return (amount / maxAmount) * 100;
+  }
+
 }

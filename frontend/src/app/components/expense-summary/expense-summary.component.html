@@ -23,3 +23,30 @@
   }
 
 </div>
+
+<!-- Spending Chart -->
+<div class="spending-chart">
+
+  <h3>Spending by Category</h3>
+
+  @for (category of byCategory | keyvalue; track category.key) {
+    <div class="chart-row">
+
+      <!-- Category name and amount -->
+      <div class="chart-label">
+        <span>{{ category.key }}</span>
+        <span>{{ category.value }}</span>
+      </div>
+
+      <!-- Chart bar -->
+      <div class="chart-bar-container">
+        <div
+          class="chart-bar"
+          [style.width.%]="getBarWidth(category.value)">
+        </div>
+      </div>
+
+    </div>
+  }
+
+</div>
