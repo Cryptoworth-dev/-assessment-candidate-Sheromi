@@ -22,10 +22,7 @@
     <!-- Table body -->
     <tbody>
 
-      <!--
-        Loop through every expense.
-        track expense.id helps Angular efficiently update the list.
-      -->
+      <!-- Display each expense -->
       @for (expense of expenses; track expense.id) {
 
         <tr>

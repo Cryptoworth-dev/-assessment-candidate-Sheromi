@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { ExpenseFormComponent } from './expense-form.component';
 
@@ -8,9 +9,11 @@ describe('ExpenseFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ExpenseFormComponent]
-    })
-    .compileComponents();
+      imports: [ExpenseFormComponent],
+      providers: [
+        provideHttpClient()
+      ]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ExpenseFormComponent);
     component = fixture.componentInstance;

@@ -4,13 +4,9 @@ import { RouterOutlet } from '@angular/router';
 // Import the Expense model 
 import { Expense } from './models/expense';
 
-// Component responsible for creating expenses
+// Components used by the application
 import { ExpenseFormComponent } from './components/expense-form/expense-form.component';
-
-// Component responsible for displaying expenses
 import { ExpenseListComponent } from './components/expense-list/expense-list.component';
-
-// Component responsible for displaying expense summary
 import { ExpenseSummaryComponent } from './components/expense-summary/expense-summary.component';
 
 
@@ -18,8 +14,7 @@ import { ExpenseSummaryComponent } from './components/expense-summary/expense-su
   selector: 'app-root',
   standalone: true,
 
-  // Make the router outlet, expense form, and expense list
-  // available in the AppComponent template
+  // Make the imported components available in the AppComponent template
   imports: [
     RouterOutlet,
     ExpenseFormComponent,
@@ -27,42 +22,37 @@ import { ExpenseSummaryComponent } from './components/expense-summary/expense-su
     ExpenseSummaryComponent
   ],
 
-  // Main application HTML template
   templateUrl: './app.component.html',
 
-  // Main application CSS file
   styleUrl: './app.component.css'
 })
 export class AppComponent {
 
-  // Reference to the expense list component 
+  // References to child components that need to be refreshed
   @ViewChild(ExpenseListComponent) 
   expenseListComponent!: ExpenseListComponent;
 
-  // Reference to the expense summary component
   @ViewChild(ExpenseSummaryComponent)
   expenseSummaryComponent!: ExpenseSummaryComponent;
 
-  // Store the expense currently selected for editing 
+  // Stores the expense currently selected for editing
   selectedExpense: Expense | null = null; 
 
-  // Called when the user clicks the Edit button 
+  // Pass the selected expense to the form for editing
   onExpenseEdit(expense: Expense): void { 
     this.selectedExpense = expense; 
   } 
 
-  // Called after an expense is created or updated 
+  // Refresh the list and summary after an expense changes
   onExpenseChanged(): void { 
     this.selectedExpense = null; 
 
-    // Refresh the expense list to show the latest data
     this.expenseListComponent.loadExpenses();
 
-    // Refresh the expense summary
     this.expenseSummaryComponent.loadSummary();
   } 
 
-  // Called when the user cancels editing 
+  // Clear the selected expense when editing is cancelled
   onEditCancelled(): void { 
     this.selectedExpense = null; 
   }

@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { ExpenseSummaryComponent } from './expense-summary.component';
 
@@ -8,9 +9,11 @@ describe('ExpenseSummaryComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ExpenseSummaryComponent]
-    })
-    .compileComponents();
+      imports: [ExpenseSummaryComponent],
+      providers: [
+        provideHttpClient()
+      ]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ExpenseSummaryComponent);
     component = fixture.componentInstance;

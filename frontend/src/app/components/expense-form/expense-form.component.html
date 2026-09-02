@@ -38,7 +38,7 @@
         id="amount"
         type="number"
         step="0.01"
-        min="0"
+        min="0.01"
         formControlName="amount"
         placeholder="Enter amount"
       />
@@ -98,11 +98,12 @@
 
     <!-- Cancel edit button --> 
     @if (editingExpenseId !== null) {
-        <button 
-        type="button" 
-        (click)="cancelEdit()"> 
+      <button
+        type="button"
+        (click)="cancelEdit()">
         Cancel
-    </button> }
+      </button>
+    }
 
   </form>
 
