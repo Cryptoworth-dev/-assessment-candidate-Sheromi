@@ -10,45 +10,45 @@ The application lets users create, view, edit, delete, and summarize expense rec
 
 ### Backend
 
-- PHP 8.3+
-- Laravel 13.29.0
-- MySQL for the application database
-- Eloquent ORM
-- Laravel Form Requests for validation
-- Pest 4.7 and PHPUnit
-- Faker 1.23 for factories and seed data
+* PHP 8.3+
+* Laravel 13.29.0
+* MySQL for the application database
+* Eloquent ORM
+* Laravel Form Requests for validation
+* Pest 4.7 and PHPUnit
+* Faker 1.23 for factories and seed data
 
 ### Frontend
 
-- Angular 18.2
-- TypeScript 5.4
-- RxJS 7.8
-- Angular Reactive Forms and HttpClient
-- Jasmine 5.1 and Karma 6.4
-- Angular CLI/build tooling 18.0.x
+* Angular 18.2
+* TypeScript 5.4
+* RxJS 7.8
+* Angular Reactive Forms and HttpClient
+* Jasmine 5.1 and Karma 6.4
+* Angular CLI/build tooling 18.0.x
 
 ## Core Features
 
-- Add an expense with a description, amount, category, and date.
-- List expenses, ordered by expense date with the most recent first.
-- Edit an existing expense.
-- Delete an expense with browser confirmation.
-- View a spending summary with total spending.
-- View spending totals by category.
-- Validate expense data in both the Angular form and Laravel API.
+* Add an expense with a description, amount, category, and date.
+* List expenses, ordered by expense date with the most recent first.
+* Edit an existing expense.
+* Delete an expense with browser confirmation.
+* View a spending summary with total spending.
+* View spending totals by category.
+* Validate expense data in both the Angular form and Laravel API.
 
 ## Additional Features
 
-- Visual spending bars show each category relative to the highest category total.
-- Automated backend API tests cover CRUD operations, summaries, and validation.
-- Frontend component tests are included for the application, form, list, and summary components.
+* Visual spending bars show each category relative to the highest category total.
+* Automated backend API tests cover CRUD operations, summaries, and validation.
+* Frontend component tests are included for the application, form, list, and summary components.
 
 ## Requirements
 
-- PHP 8.3 or later
-- Composer
-- MySQL
-- Node.js and npm
+* PHP 8.3 or later
+* Composer
+* MySQL
+* Node.js and npm
 
 The committed PHPUnit configuration uses an in-memory SQLite database for tests, but the running application is configured for MySQL by `.env.example`.
 
@@ -56,59 +56,83 @@ The committed PHPUnit configuration uses an in-memory SQLite database for tests,
 
 From a clean checkout:
 
-1. Clone the repository and enter it:
+### 1. Clone the repository
 
-    ```bash
-    git clone https://github.com/Cryptoworth-dev/-assessment-candidate-Sheromi.git
-    cd -assessment-candidate-Sheromi
-    ```
+```bash
+git clone https://github.com/Cryptoworth-dev/-assessment-candidate-Sheromi.git
+cd -assessment-candidate-Sheromi
+```
 
-2. Set up the Laravel backend:
+### 2. Set up the Laravel backend
 
-    ```bash
-    cd backend
-    composer install
-    ```
+```bash
+cd backend
+composer install
+```
 
-   Copy the environment template. In PowerShell:
+Copy the environment template.
 
-   Copy-Item .env.example .env
+**PowerShell:**
 
-   On macOS/Linux, use `cp .env.example .env`.
+```powershell
+Copy-Item .env.example .env
+```
 
-   Generate the application key:
+**macOS/Linux:**
 
-   php artisan key:generate
+```bash
+cp .env.example .env
+```
 
-3. Create a MySQL database named `expense_tracker_db`, or choose another database name and update `DB_DATABASE` in `backend/.env`. Set `DB_USERNAME` and `DB_PASSWORD` as required for the local MySQL installation.
+Generate the application key:
 
-4. Run the migrations and insert the sample data:
+```bash
+php artisan key:generate
+```
 
-   php artisan migrate --seed
+### 3. Configure the database
 
-   The seeder creates one sample user and 10 sample expenses. Expenses are not associated with that user.
+Create a MySQL database named `expense_tracker_db`, or choose another database name and update `DB_DATABASE` in `backend/.env`.
 
-5. Start the Laravel API and leave it running:
+Set `DB_USERNAME` and `DB_PASSWORD` according to your local MySQL installation.
 
-   php artisan serve
+### 4. Run migrations and seed sample data
 
-6. In a second terminal, enter the Angular frontend and install its dependencies:
+```bash
+php artisan migrate --seed
+```
 
-    ```bash
-    cd frontend
-    npm install
-    ```
+The seeder creates one sample user and 10 sample expenses. The expenses are not associated with that user.
 
-7. Start the Angular application:
+### 5. Start the Laravel API
 
-   npm start
+```bash
+php artisan serve
+```
+
+Leave the API server running.
+
+### 6. Set up the Angular frontend
+
+In a second terminal:
+
+```bash
+cd frontend
+npm install
+```
+
+### 7. Start the Angular application
+
+```bash
+npm start
+```
 
 ## Running the Application
 
 Both servers must be running:
 
-- Backend API: `http://localhost:8000`
-- Frontend: `http://localhost:4200/`
+* Backend API: `http://localhost:8000`
+* Frontend: `http://localhost:4200/`
 
 The frontend currently uses the hard-coded API base URL `http://localhost:8000/api/expenses`.
 
@@ -133,10 +157,10 @@ The Angular reactive form requires description, amount, category, and expense da
 
 The Laravel create and update requests enforce:
 
-- `description`: required string, maximum 255 characters
-- `amount`: required numeric value, minimum `0.01`
-- `category`: required string, maximum 100 characters, with at least one alphabetic character
-- `expense_date`: required valid date
+* `description`: required string, maximum 255 characters
+* `amount`: required numeric value, minimum `0.01`
+* `category`: required string, maximum 100 characters, with at least one alphabetic character
+* `expense_date`: required valid date
 
 Invalid API requests return HTTP `422` validation responses. Frontend API failures are currently logged to the browser console rather than shown in a dedicated user-facing error state.
 
@@ -144,36 +168,38 @@ Invalid API requests return HTTP `422` validation responses. Frontend API failur
 
 Run backend tests from `backend/`:
 
+```bash
 php artisan test
+```
 
 The Pest feature tests cover listing, creating, retrieving, updating, deleting, summary totals and category totals, required-field validation, invalid values, zero and negative amounts, and numeric-only categories.
 
 Run frontend tests from `frontend/`:
 
+```bash
 npm test
+```
 
 The Angular/Jasmine/Karma tests cover component creation and HTTP request handling for expense data and summary data.
 
 ## Assumptions and Trade-offs
 
-- Expenses are standalone records and are not associated with users.
-- Authentication is not implemented for the expense API.
-- Categories are free-text values rather than a predefined list.
-- Expense amounts are stored as decimal values with two decimal places, and dates are stored as SQL dates.
-- The frontend has no configured application routes and renders the tracker from the root component.
-- The implementation intentionally focuses on the required core functionality and selected bonus features while keeping the code straightforward for the assessment.
+* Expenses are standalone records and are not associated with users.
+* Authentication is not implemented for the expense API.
+* Categories are free-text values rather than a predefined list.
+* Expense amounts are stored as decimal values with two decimal places, and dates are stored as SQL dates.
+* The frontend has no configured application routes and renders the tracker from the root component.
+* The implementation intentionally focuses on the required core functionality and selected bonus features while keeping the code straightforward for the assessment.
 
 ## Future Improvements
 
-The current implementation focuses on the required core functionality and selected bonus features. With additional development time, the following could be added:
-
-- Filtering and pagination for larger expense lists.
-- Search by expense description or category.
-- Authentication and user-specific expenses.
-- CSV export for expense records.
-- Docker configuration for easier local setup and deployment.
+* Filtering and pagination for larger expense lists.
+* Search by expense description or category.
+* Authentication and user-specific expenses.
+* CSV export for expense records.
+* Docker configuration for easier local setup and deployment.
 
 ## Backend and Frontend Documentation
 
-- [Backend documentation](backend/README.md)
-- [Frontend documentation](frontend/README.md)
+* [Backend documentation](backend/README.md)
+* [Frontend documentation](frontend/README.md)
