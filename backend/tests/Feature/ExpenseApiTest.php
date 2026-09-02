@@ -5,7 +5,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
 
-// Test to ensure that the Expense API can list expenses correctly.
+// Test to ensure that the Expense API returns a successful response with the expected data structure.
 test('it can list expenses', function () {
     Expense::factory()->count(3)->create();
 
@@ -156,7 +156,7 @@ test('it validates invalid expense values', function () {
         ]);
 });
 
-// Test to ensure that the Expense API validates required fields when updating an existing expense record.
+// Test to ensure that the Expense API validates invalid expense values when updating an existing expense record.
 test('it validates invalid expense values when updating', function () {
     $expense = Expense::factory()->create();
 

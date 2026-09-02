@@ -7,11 +7,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Expense extends Model
 {
-    // The Expense model represents an expense record in the database. It uses the HasFactory trait to enable factory-based testing and seeding.
+    /**
+     * Enable factory-based testing and database seeding.
+     */
     use HasFactory;
 
-    /* The Expense model represents the 'expenses' table in the database. 
-    It defines the fillable attributes and casts for the model. */
+    /**
+     * Attributes that can be mass assigned.
+     */
     protected $fillable = [
         'description',
         'amount',
@@ -19,6 +22,9 @@ class Expense extends Model
         'expense_date',
     ];
 
+    /**
+     * Cast database values to appropriate PHP types.
+     */
     protected $casts = [
         'amount' => 'decimal:2',
         'expense_date' => 'date',

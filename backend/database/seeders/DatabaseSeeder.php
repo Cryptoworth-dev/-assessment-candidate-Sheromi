@@ -17,14 +17,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
 
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
 
-        // Seed expenses for the test user
+        // Seed sample expenses
         Expense::factory()->count(10)->create();
     }
 }

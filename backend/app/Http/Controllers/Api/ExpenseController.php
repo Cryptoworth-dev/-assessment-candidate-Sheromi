@@ -3,13 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
 use App\Http\Requests\StoreExpenseRequest;
+use App\Http\Requests\UpdateExpenseRequest;
 use App\Models\Expense;
 use Illuminate\Http\JsonResponse;
 
-use App\Http\Requests\UpdateExpenseRequest;
 
 class ExpenseController extends Controller
 {
@@ -58,7 +56,9 @@ class ExpenseController extends Controller
         ], 201);
     }
 
-    // Display the specified expense.
+    /**
+     * Display the specified expense.
+     */
     public function show(Expense $expense): JsonResponse
     {
         return response()->json([
@@ -66,7 +66,9 @@ class ExpenseController extends Controller
         ]);
     }
 
-    // Update the specified expense.
+    /**
+     * Update the specified expense.
+     */
     public function update(
         UpdateExpenseRequest $request,
         Expense $expense
@@ -79,7 +81,9 @@ class ExpenseController extends Controller
         ]);
     }
 
-    // Remove the specified expense.
+    /**
+     * Remove the specified expense.
+     */
     public function destroy(Expense $expense): JsonResponse
     {
         $expense->delete();
