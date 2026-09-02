@@ -176,3 +176,42 @@ test('it validates invalid expense values when updating', function () {
             'expense_date',
         ]);
 });
+
+// Test to ensure that zero and negative amounts are rejected.
+test('it rejects zero and negative expense amounts', function () {
+    $zeroResponse = $this->postJson('/api/expenses', [
+        'description' => 'Test expense',
+        'amount' => 0,
+        'category' => 'Food',
+        'expense_date' => '2026-09-01',
+    ]);
+
+    $zeroResponse
+        ->assertStatus(422)
+        ->assertJsonValidationErrors(['amount']);
+
+    $negativeResponse = $this->postJson('/api/expenses', [
+        'description' => 'Test expense',
+        'amount' => -100,
+        'category' => 'Food',
+        'expense_date' => '2026-09-01',
+    ]);
+
+    $negativeResponse
+        ->assertStatus(422)
+        ->assertJsonValidationErrors(['amount']);
+});
+
+// Test to ensure that numeric-only categories are rejected.
+test('it rejects numeric-only categories', function () {
+    $response = $this->postJson('/api/expenses', [
+        'description' => 'Test expense',
+        'amount' => 1000,
+        'category' => '12345',
+        'expense_date' => '2026-09-01',
+    ]);
+
+    $response
+        ->assertStatus(422)
+        ->assertJsonValidationErrors(['category']);
+});
