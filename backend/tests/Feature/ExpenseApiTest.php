@@ -38,7 +38,7 @@ test('it can create an expense', function () {
     ]);
 });
 
-// Test to ensure that the Expense API can update an existing expense record.
+// Test to ensure that the Expense API can return a single expense.
 test('it can show a single expense', function () {
     $expense = Expense::factory()->create([
         'description' => 'Dinner',

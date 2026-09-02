@@ -25,7 +25,8 @@
   <!-- Expense list -->
   <section class="card">
     <app-expense-list
-      (expenseEdit)="onExpenseEdit($event)">
+      (expenseEdit)="onExpenseEdit($event)"
+      (expenseDeleted)="onExpenseChanged()">
     </app-expense-list>
   </section>
 

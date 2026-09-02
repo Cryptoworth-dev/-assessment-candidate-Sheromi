@@ -26,6 +26,9 @@ export class ExpenseListComponent implements OnInit {
   // Notify the parent component when an expense is selected for editing
   @Output() expenseEdit = new EventEmitter<Expense>();
 
+  // Notify the parent component when an expense is deleted
+  @Output() expenseDeleted = new EventEmitter<void>();
+
   // Inject the ExpenseService
   constructor(private expenseService: ExpenseService) {}
 
@@ -83,8 +86,8 @@ export class ExpenseListComponent implements OnInit {
         // Log the deleted expense ID
         console.log('Expense deleted successfully:', id);
 
-        // Refresh the expense list after deletion
-        this.loadExpenses();
+        // Notify the parent component that an expense was deleted
+        this.expenseDeleted.emit();
       },
 
       // Handle API errors
