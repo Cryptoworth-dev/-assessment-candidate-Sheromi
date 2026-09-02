@@ -58,13 +58,17 @@ From a clean checkout:
 
 1. Clone the repository and enter it:
 
+    ```bash
     git clone https://github.com/Cryptoworth-dev/-assessment-candidate-Sheromi.git
     cd -assessment-candidate-Sheromi
+    ```
 
 2. Set up the Laravel backend:
 
-   cd backend
-   composer install
+    ```bash
+    cd backend
+    composer install
+    ```
 
    Copy the environment template. In PowerShell:
 
@@ -90,8 +94,10 @@ From a clean checkout:
 
 6. In a second terminal, enter the Angular frontend and install its dependencies:
 
-   cd frontend
-   npm install
+    ```bash
+    cd frontend
+    npm install
+    ```
 
 7. Start the Angular application:
 
@@ -161,11 +167,11 @@ The Angular/Jasmine/Karma tests cover component creation and HTTP request handli
 
 The current implementation focuses on the required core functionality and selected bonus features. With additional development time, the following could be added:
 
-Filtering and pagination for larger expense lists.
-Search by expense description or category.
-Authentication and user-specific expenses.
-CSV export for expense records.
-Docker configuration for easier local setup and deployment.
+- Filtering and pagination for larger expense lists.
+- Search by expense description or category.
+- Authentication and user-specific expenses.
+- CSV export for expense records.
+- Docker configuration for easier local setup and deployment.
 
 ## Backend and Frontend Documentation
 
