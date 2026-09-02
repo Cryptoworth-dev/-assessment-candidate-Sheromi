@@ -49,7 +49,7 @@ export class ExpenseFormComponent implements OnChanges {
   // Create the expense form with validation rules
   expenseForm = this.formBuilder.group({
     description: ['', Validators.required],
-    amount: ['', [Validators.required, Validators.min(0)]],
+    amount: ['', [Validators.required, Validators.min(0.01)]],
     category: ['', Validators.required],
     expense_date: ['', Validators.required]
   });
